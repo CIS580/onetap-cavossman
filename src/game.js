@@ -1,7 +1,13 @@
 "use strict;"
+//Broken, need to use updated github repo to catch this file up to date.
+var oldTime;
+var paused;
 
-export class Game {
 
+
+export Game {
+
+  
   /**
    * @constructor Game
    * Creates a new game object
@@ -10,8 +16,8 @@ export class Game {
    * @param {function} renderFunction function to render the game
    */
   constructor(screen, updateFunction, renderFunction) {
-    this.update = updateFunction;
-    this.render = renderFunction;
+    update = updateFunction;
+    render = renderFunction;
 
     // Set up buffers
     this.frontBuffer = screen;
@@ -22,8 +28,8 @@ export class Game {
     this.backCtx = this.backBuffer.getContext('2d');
 
     // Start the game loop
-    this.oldTime = performance.now();
-    this.paused = false;
+    oldTime = performance.now();
+    paused = false;
     window.requestAnimationFrame(this.loop);
   }
 
@@ -42,11 +48,11 @@ export class Game {
    * @param{time} the current time as a DOMHighResTimeStamp
    */
   loop(newTime) {
-    var elapsedTime = newTime - this.oldTime;
-    this.oldTime = newTime;
+    var elapsedTime = newTime - oldTime;
+    oldTime = newTime;
 
-    if(!this.paused) this.update(elapsedTime);
-    this.render(elapsedTime, this.frontCtx);
+    if(!paused) update(elapsedTime);
+    render(elapsedTime, this.frontCtx);
 
     // Flip the back buffer
     frontCtx.drawImage(backBuffer, 0, 0);
